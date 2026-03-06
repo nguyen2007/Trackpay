@@ -137,6 +137,25 @@ box-shadow:0 2px 6px rgba(0,0,0,0.1);
 
 </div>
 
+<div class="income-box">
+
+<h2>Withdraw from Jar</h2>
+
+<select id="jarSelect">
+<option value="nec">NEC - Necessity</option>
+<option value="ffa">FFA - Financial Freedom</option>
+<option value="edu">EDU - Education</option>
+<option value="ltss">LTSS - Long Term Saving</option>
+<option value="play">PLAY - Playing</option>
+<option value="give">GIVE - Giving</option>
+</select>
+
+<input id="withdrawAmount" type="number" placeholder="Amount">
+
+<button onclick="withdrawMoney()">Withdraw</button>
+
+</div>
+
 
 <div class="jars">
 
@@ -273,6 +292,7 @@ jarChart.update()
 
 </body>
 </html>
+
 
 
 
