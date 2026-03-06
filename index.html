@@ -209,7 +209,7 @@ Logout
 </div>
 
 <div class="jar ffa">
-<h3>FFA</h3>
+<h3>Financial Freedom Account</h3>
 <p class="amount" id="ffa">0</p>
 </div>
 
@@ -248,7 +248,7 @@ Logout
 <th>Date</th>
 <th>Income</th>
 <th>Necessity</th>
-<th>FFA</th>
+<th>Financial Freedom</th>
 <th>EDU</th>
 <th>LTSS</th>
 <th>PLAY</th>
@@ -312,7 +312,7 @@ document.getElementById("totalIncome").innerText="$"+totalIncome
 let jars=calculateJars(income)
 
 document.getElementById("nec").innerText=jars.Necessity.toFixed(2)
-document.getElementById("ffa").innerText=jars.ffa.toFixed(2)
+document.getElementById("ffa").innerText=jars.Ffa.toFixed(2)
 document.getElementById("edu").innerText=jars.edu.toFixed(2)
 document.getElementById("ltss").innerText=jars.ltss.toFixed(2)
 document.getElementById("play").innerText=jars.Play.toFixed(2)
