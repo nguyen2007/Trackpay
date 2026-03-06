@@ -214,12 +214,12 @@ Logout
 </div>
 
 <div class="jar edu">
-<h3>EDU</h3>
+<h3>Education Account</h3>
 <p class="amount" id="edu">0</p>
 </div>
 
 <div class="jar ltss">
-<h3>LTSS</h3>
+<h3>Long-term saving Account</h3>
 <p class="amount" id="ltss">0</p>
 </div>
 
@@ -229,7 +229,7 @@ Logout
 </div>
 
 <div class="jar give">
-<h3>GIVE</h3>
+<h3>Giving Account</h3>
 <p class="amount" id="give">0</p>
 </div>
 
@@ -249,8 +249,8 @@ Logout
 <th>Income</th>
 <th>Necessity</th>
 <th>Financial Freedom</th>
-<th>EDU</th>
-<th>LTSS</th>
+<th>Education</th>
+<th>LTS</th>
 <th>PLAY</th>
 <th>GIVE</th>
 </tr>
@@ -271,7 +271,7 @@ const ctx=document.getElementById("budgetChart")
 const chart=new Chart(ctx,{
 type:"pie",
 data:{
-labels:["Necessity","FFA","EDU","LTSS","PLAY","GIVE"],
+labels:["Necessity","FFA","Education","LTS","PLAY","GIVE"],
 datasets:[{
 data:[0,0,0,0,0,0],
 backgroundColor:[
@@ -313,8 +313,8 @@ let jars=calculateJars(income)
 
 document.getElementById("nec").innerText=jars.Necessity.toFixed(2)
 document.getElementById("ffa").innerText=jars.Financial Freedom.toFixed(2)
-document.getElementById("edu").innerText=jars.edu.toFixed(2)
-document.getElementById("ltss").innerText=jars.ltss.toFixed(2)
+document.getElementById("edu").innerText=jars.Education.toFixed(2)
+document.getElementById("ltss").innerText=jars.LTS.toFixed(2)
 document.getElementById("play").innerText=jars.Play.toFixed(2)
 document.getElementById("give").innerText=jars.give.toFixed(2)
 
