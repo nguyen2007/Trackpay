@@ -8,6 +8,19 @@ onAuthStateChanged,
 signOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import { getAuth,
+GoogleAuthProvider,
+signInWithPopup,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+
 const firebaseConfig = {
   apiKey: "YOUR_KEY",
   authDomain: "YOUR_DOMAIN",
@@ -17,6 +30,8 @@ const firebaseConfig = {
   appId: "XXXX"
 };
 
+
+const provider = new GoogleAuthProvider();
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
@@ -31,6 +46,28 @@ createUserWithEmailAndPassword(auth, email, password)
 alert("Account created!");
 window.location.href = "index.html";
 
+window.googleLogin = function(){
+
+signInWithPopup(auth, provider)
+
+.then((result)=>{
+
+const user = result.user;
+
+console.log("Google User:", user);
+
+window.location.href = "index.html";
+
+})
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+}
+  
 })
 .catch(error => alert(error.message));
 
@@ -76,3 +113,4 @@ window.location.href = "login.html";
 }
 
 });
+
