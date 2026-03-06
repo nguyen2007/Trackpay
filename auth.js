@@ -10,8 +10,6 @@ onAuthStateChanged,
 signOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-import { initializeApp } from 
-"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
 
 
@@ -25,9 +23,10 @@ const firebaseConfig = {
 };
 
 
-const provider = new GoogleAuthProvider();
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 window.signup = function(){
 
@@ -107,5 +106,6 @@ window.location.href = "login.html";
 }
 
 });
+
 
 
