@@ -3,83 +3,173 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Trackpay - 6 Jars Budget Manager</title>
+<title>TrackPay - Smart Budget Manager</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-<link rel="stylesheet" href="/css/style.css">
-
-<header class="header">
-<h1>TrackPay</h1>
-<p>Smart Budget Management</p>
-</header>
 
 body{
-font-family: Arial;
-background:#f5f5f5;
+font-family:Arial, sans-serif;
+background:#f4f7fb;
 margin:0;
 padding:20px;
+color:#333;
 }
 
 .container{
-max-width:900px;
+max-width:1100px;
 margin:auto;
 }
 
-h1{
+header{
 text-align:center;
+margin-bottom:30px;
 }
 
-.input-box{
+header h1{
+font-size:36px;
+margin:0;
+color:#2c3e50;
+}
+
+header p{
+color:#7f8c8d;
+}
+
+.summary{
 background:white;
 padding:20px;
-border-radius:10px;
-margin-bottom:20px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+margin-bottom:25px;
+}
+
+.summary h2{
+margin:0;
+}
+
+#totalIncome{
+font-size:26px;
+margin-top:10px;
+color:#27ae60;
+}
+
+.input-section{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+margin-bottom:25px;
+text-align:center;
 }
 
 input{
 padding:10px;
+width:200px;
 margin-right:10px;
 }
 
 button{
 padding:10px 15px;
-background:#28a745;
+background:#27ae60;
 border:none;
 color:white;
 cursor:pointer;
+border-radius:5px;
+}
+
+button:hover{
+background:#219150;
 }
 
 .dashboard{
 display:grid;
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
 gap:15px;
-margin-top:20px;
+margin-bottom:30px;
 }
 
 .jar{
 background:white;
 padding:20px;
-border-radius:10px;
+border-radius:12px;
 text-align:center;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+transition:0.3s;
+animation:fadeIn 0.6s ease;
+}
+
+.jar:hover{
+transform:translateY(-5px);
+}
+
+.jar h3{
+margin:0;
 }
 
 .amount{
-font-size:20px;
+font-size:22px;
 margin-top:10px;
+font-weight:bold;
+}
+
+.nec{border-top:5px solid #3498db;}
+.ffa{border-top:5px solid #2ecc71;}
+.edu{border-top:5px solid #9b59b6;}
+.ltss{border-top:5px solid #e67e22;}
+.play{border-top:5px solid #e91e63;}
+.give{border-top:5px solid #f1c40f;}
+
+.chart-box{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+margin-bottom:30px;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:20px;
 background:white;
+border-radius:10px;
+overflow:hidden;
 }
 
 th,td{
-border:1px solid #ddd;
 padding:10px;
+border-bottom:1px solid #eee;
 text-align:center;
+}
+
+th{
+background:#f0f0f0;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@media(max-width:768px){
+
+input{
+width:100%;
+margin-bottom:10px;
+}
+
+button{
+width:100%;
+}
+
 }
 
 </style>
@@ -89,54 +179,61 @@ text-align:center;
 
 <div class="container">
 
-<h1>Trackpay</h1>
-<p style="text-align:center;">6 Jars Money Management</p>
+<header>
+<h1>TrackPay</h1>
+<p>Smart 6-Jars Budget Manager</p>
+</header>
 
-<div class="input-box">
+<div class="summary">
+<h2>Total Income</h2>
+<p id="totalIncome">$0</p>
+</div>
 
+<div class="input-section">
 <h3>Add Income</h3>
-
 <input type="number" id="income" placeholder="Enter income">
-
-<button onclick="addIncome()">Add</button>
-
+<button onclick="addIncome()">Add Income</button>
 </div>
 
 <div class="dashboard">
 
-<div class="jar">
+<div class="jar nec">
 <h3>NEC</h3>
-<div id="nec" class="amount">0</div>
+<p class="amount" id="nec">0</p>
 </div>
 
-<div class="jar">
+<div class="jar ffa">
 <h3>FFA</h3>
-<div id="ffa" class="amount">0</div>
+<p class="amount" id="ffa">0</p>
 </div>
 
-<div class="jar">
+<div class="jar edu">
 <h3>EDU</h3>
-<div id="edu" class="amount">0</div>
+<p class="amount" id="edu">0</p>
 </div>
 
-<div class="jar">
+<div class="jar ltss">
 <h3>LTSS</h3>
-<div id="ltss" class="amount">0</div>
+<p class="amount" id="ltss">0</p>
 </div>
 
-<div class="jar">
+<div class="jar play">
 <h3>PLAY</h3>
-<div id="play" class="amount">0</div>
+<p class="amount" id="play">0</p>
 </div>
 
-<div class="jar">
+<div class="jar give">
 <h3>GIVE</h3>
-<div id="give" class="amount">0</div>
+<p class="amount" id="give">0</p>
 </div>
 
 </div>
 
-<h2>History</h2>
+<div class="chart-box">
+<canvas id="budgetChart"></canvas>
+</div>
+
+<h2>Income History</h2>
 
 <table>
 
@@ -161,6 +258,28 @@ text-align:center;
 
 <script>
 
+let totalIncome=0
+
+const ctx=document.getElementById("budgetChart")
+
+const chart=new Chart(ctx,{
+type:"pie",
+data:{
+labels:["NEC","FFA","EDU","LTSS","PLAY","GIVE"],
+datasets:[{
+data:[0,0,0,0,0,0],
+backgroundColor:[
+"#3498db",
+"#2ecc71",
+"#9b59b6",
+"#e67e22",
+"#e91e63",
+"#f1c40f"
+]
+}]
+}
+})
+
 function calculateJars(income){
 
 return{
@@ -180,6 +299,10 @@ let income=parseFloat(document.getElementById("income").value)
 
 if(!income)return
 
+totalIncome+=income
+
+document.getElementById("totalIncome").innerText="$"+totalIncome
+
 let jars=calculateJars(income)
 
 document.getElementById("nec").innerText=jars.nec.toFixed(2)
@@ -188,6 +311,17 @@ document.getElementById("edu").innerText=jars.edu.toFixed(2)
 document.getElementById("ltss").innerText=jars.ltss.toFixed(2)
 document.getElementById("play").innerText=jars.play.toFixed(2)
 document.getElementById("give").innerText=jars.give.toFixed(2)
+
+chart.data.datasets[0].data=[
+jars.nec,
+jars.ffa,
+jars.edu,
+jars.ltss,
+jars.play,
+jars.give
+]
+
+chart.update()
 
 let history=JSON.parse(localStorage.getItem("history"))||[]
 
@@ -236,6 +370,3 @@ loadHistory()
 
 </body>
 </html>
-
-
-
