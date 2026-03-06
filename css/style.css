@@ -1,0 +1,20 @@
+.jar-card{
+background:white;
+border-radius:12px;
+padding:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.jar-card:hover{
+transform:translateY(-5px);
+}
+.dashboard{
+display:grid;
+grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+.dark-mode{
+background:#1e1e1e;
+color:white;
+}

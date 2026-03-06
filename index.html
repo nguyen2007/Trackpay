@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>6 Jars Budget Manager</title>
+
+<style>
+<link rel="stylesheet" href="/css/style.css">
+</style>
+
+<script src="javascript/subtract.js"></script>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+.input-section{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+}
+
+input{
+    padding:10px;
+    width:200px;
+    margin-right:10px;
+}
+
+button{
+    padding:10px 15px;
+    background:#4CAF50;
+    border:none;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#45a049;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.jar{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.jar h3{
+    margin:0;
+}
+
+.amount{
+    font-size:20px;
+    color:#2c3e50;
+    margin-top:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th, td{
+    padding:10px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+th{
+    background:#f0f0f0;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>6 Jars Money Manager</h1>
+
+<div class="input-section">
+
+<h3>Add Income</h3>
+
+<input type="number" id="income" placeholder="Enter income">
+
+<button onclick="addIncome()">Add Income</button>
+
+</div>
+
+<div class="dashboard">
+
+<div class="jar">
+<h3>NEC</h3>
+<div id="nec" class="amount">0</div>
+</div>
+
+<div class="jar">
+<h3>FFA</h3>
+<div id="ffa" class="amount">0</div>
+</div>
+
+<div class="jar">
+<h3>EDU</h3>
+<div id="edu" class="amount">0</div>
+</div>
+
+<div class="jar">
+<h3>LTSS</h3>
+<div id="ltss" class="amount">0</div>
+</div>
+
+<div class="jar">
+<h3>PLAY</h3>
+<div id="play" class="amount">0</div>
+</div>
+
+<div class="jar">
+<h3>GIVE</h3>
+<div id="give" class="amount">0</div>
+</div>
+
+</div>
+
+<h2>Income History</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Date</th>
+<th>Income</th>
+<th>NEC</th>
+<th>FFA</th>
+<th>EDU</th>
+<th>LTSS</th>
+<th>PLAY</th>
+<th>GIVE</th>
+</tr>
+</thead>
+
+<tbody id="history"></tbody>
+
+</table>
+
+</div>
+
+<script>
+
+function calculateJars(income){
+
+return{
+
+nec: income * 0.55,
+ffa: income * 0.10,
+edu: income * 0.10,
+ltss: income * 0.10,
+play: income * 0.10,
+give: income * 0.05
+
+}
+
+}
+
+function addIncome(){
+
+let income = parseFloat(document.getElementById("income").value);
+
+if(!income || income <= 0){
+
+alert("Enter valid income");
+return;
+
+}
+
+let jars = calculateJars(income);
+
+document.getElementById("nec").innerText = jars.nec.toFixed(2);
+document.getElementById("ffa").innerText = jars.ffa.toFixed(2);
+document.getElementById("edu").innerText = jars.edu.toFixed(2);
+document.getElementById("ltss").innerText = jars.ltss.toFixed(2);
+document.getElementById("play").innerText = jars.play.toFixed(2);
+document.getElementById("give").innerText = jars.give.toFixed(2);
+
+let history = JSON.parse(localStorage.getItem("history")) || [];
+
+let record = {
+
+date: new Date().toLocaleDateString(),
+income: income,
+...jars
+
+}
+
+history.push(record);
+
+localStorage.setItem("history", JSON.stringify(history));
+
+loadHistory();
+
+}
+
+function loadHistory(){
+
+let history = JSON.parse(localStorage.getItem("history")) || [];
+
+let table = document.getElementById("history");
+
+table.innerHTML = "";
+
+history.forEach(item => {
+
+let row = `
+<tr>
+
+<td>${item.date}</td>
+<td>${item.income}</td>
+<td>${item.nec.toFixed(2)}</td>
+<td>${item.ffa.toFixed(2)}</td>
+<td>${item.edu.toFixed(2)}</td>
+<td>${item.ltss.toFixed(2)}</td>
+<td>${item.play.toFixed(2)}</td>
+<td>${item.give.toFixed(2)}</td>
+
+</tr>
+`;
+
+table.innerHTML += row;
+
+});
+
+}
+
+loadHistory();
+
+</script>
+
+</body>
+</html>
