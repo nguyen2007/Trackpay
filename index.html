@@ -159,7 +159,7 @@ box-shadow:0 2px 6px rgba(0,0,0,0.1);
 </div>
 
 <div class="jar">
-<h3>LTSS</h3>
+<h3>LTS</h3>
 <p>Long-term Saving</p>
 <div class="amount" id="ltss">$0</div>
 </div>
@@ -245,7 +245,7 @@ const ctx=document.getElementById("jarChart")
 const jarChart=new Chart(ctx,{
 type:"pie",
 data:{
-labels:["NEC","FFA","EDU","LTSS","PLAY","GIVE"],
+labels:["NEC","FFA","EDU","LTS","PLAY","GIVE"],
 datasets:[{
 data:[0,0,0,0,0,0]
 }]
@@ -273,5 +273,6 @@ jarChart.update()
 
 </body>
 </html>
+
 
 
