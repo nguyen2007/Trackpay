@@ -44,7 +44,7 @@ createUserWithEmailAndPassword(auth, email, password)
 
 alert("Account created!");
 window.location.href = "index.html";
-})
+});
 
 .catch((error)=>{
 
@@ -63,7 +63,7 @@ console.log("Google User:", user);
 
 window.location.href = "index.html";
 
-})
+});
 
 .catch((error)=>{
 
@@ -81,7 +81,7 @@ signInWithEmailAndPassword(auth, email, password)
 
 window.location.href = "index.html";
 
-})
+});
 .catch(error => alert(error.message));
 
 }
@@ -92,7 +92,7 @@ signOut(auth).then(() => {
 
 window.location.href = "login.html";
 
-})
+});
 
 }
 
@@ -111,6 +111,7 @@ window.location.href = "login.html";
 }
 
 });
+
 
 
 
