@@ -1,23 +1,18 @@
-import { initializeApp } from 
-"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+// Firebase imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import { getAuth, 
-GoogleAuthProvider,
-signInWithPopup,
+import {
+getAuth,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
-onAuthStateChanged,
-signOut
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+GoogleAuthProvider,
+signInWithPopup,
+signOut,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC5QcVkCTr1KhwqBvRARI3yEVMTocyCfsc",
   authDomain: "trackpay-app-fa1ff.firebaseapp.com",
@@ -28,11 +23,20 @@ const firebaseConfig = {
   measurementId: "G-9Q76DWEJR3"
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
+
+
+// Google provider
 const provider = new GoogleAuthProvider();
+
+
+
+/* --------------------------
+EMAIL SIGN UP
+--------------------------- */
 
 window.signup = function(){
 
@@ -40,36 +44,28 @@ const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
 
 createUserWithEmailAndPassword(auth, email, password)
-.then(() => {
 
-alert("Account created!");
-window.location.href = "index.html";
-});
+.then((userCredential)=>{
 
-.catch((error)=>{
-
-alert(error.message));
-
-}
-window.googleLogin = function(){
-
-signInWithPopup(auth, provider)
-
-.then((result)=>{
-
-const user = result.user;
-
-console.log("Google User:", user);
+alert("Account created successfully");
 
 window.location.href = "index.html";
 
-});
+})
 
 .catch((error)=>{
 
-alert(error.message));
+alert(error.message);
 
-}
+});
+
+};
+
+
+
+/* --------------------------
+EMAIL LOGIN
+--------------------------- */
 
 window.login = function(){
 
@@ -77,50 +73,93 @@ const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
 
 signInWithEmailAndPassword(auth, email, password)
-.then(() => {
+
+.then((userCredential)=>{
 
 window.location.href = "index.html";
 
-});
-.catch(error => alert(error.message));
+})
 
-}
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+};
+
+
+
+/* --------------------------
+GOOGLE LOGIN
+--------------------------- */
+
+window.googleLogin = function(){
+
+signInWithPopup(auth, provider)
+
+.then((result)=>{
+
+window.location.href = "index.html";
+
+})
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+};
+
+
+
+/* --------------------------
+LOGOUT
+--------------------------- */
 
 window.logout = function(){
 
-signOut(auth).then(() => {
+signOut(auth)
+
+.then(()=>{
 
 window.location.href = "login.html";
 
 })
-.catch((error) => {
 
-console.error("Logout error:", error);
+.catch((error)=>{
 
-});
-
-}
-
-onAuthStateChanged(auth, user => {
-
-if(user){
-
-console.log("Logged in:", user.email);
-
-}else{
-
-if(window.location.pathname.includes("index.html")){
-window.location.href = "login.html";
-}
-
-}
+console.log(error);
 
 });
 
+};
 
 
 
+/* --------------------------
+AUTH PROTECTION
+--------------------------- */
 
+onAuthStateChanged(auth,(user)=>{
 
+const path = window.location.pathname;
 
+/* protect dashboard */
 
+if(!user && path.includes("index.html")){
+
+window.location.href="login.html";
+
+}
+
+/* prevent logged users from seeing login page */
+
+if(user && path.includes("login.html")){
+
+window.location.href="index.html";
+
+}
+
+});
