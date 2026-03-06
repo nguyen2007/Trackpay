@@ -92,6 +92,11 @@ signOut(auth).then(() => {
 
 window.location.href = "login.html";
 
+})
+.catch((error) => {
+
+console.error("Logout error:", error);
+
 });
 
 }
@@ -111,6 +116,7 @@ window.location.href = "login.html";
 }
 
 });
+
 
 
 
