@@ -2,6 +2,8 @@ import { initializeApp } from
 "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
 import { getAuth, 
+GoogleAuthProvider,
+signInWithPopup,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
 onAuthStateChanged,
@@ -11,14 +13,6 @@ signOut
 import { initializeApp } from 
 "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
-import { getAuth,
-GoogleAuthProvider,
-signInWithPopup,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword,
-onAuthStateChanged,
-signOut
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 
 const firebaseConfig = {
@@ -113,4 +107,5 @@ window.location.href = "login.html";
 }
 
 });
+
 
