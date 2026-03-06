@@ -204,7 +204,7 @@ Logout
 <div class="dashboard">
 
 <div class="jar nec">
-<h3>NEC</h3>
+<h3>Necessity Account</h3>
 <p class="amount" id="nec">0</p>
 </div>
 
@@ -247,7 +247,7 @@ Logout
 <tr>
 <th>Date</th>
 <th>Income</th>
-<th>NEC</th>
+<th>Necessity</th>
 <th>FFA</th>
 <th>EDU</th>
 <th>LTSS</th>
@@ -271,7 +271,7 @@ const ctx=document.getElementById("budgetChart")
 const chart=new Chart(ctx,{
 type:"pie",
 data:{
-labels:["NEC","FFA","EDU","LTSS","PLAY","GIVE"],
+labels:["Necessity","FFA","EDU","LTSS","PLAY","GIVE"],
 datasets:[{
 data:[0,0,0,0,0,0],
 backgroundColor:[
@@ -378,6 +378,7 @@ loadHistory()
 
 </body>
 </html>
+
 
 
 
