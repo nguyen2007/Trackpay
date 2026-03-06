@@ -1,9 +1,21 @@
-function spendMoney(jar, amount){
+function withdrawMoney(){
 
-data[jar] -= amount;
+const jar=document.getElementById("jarSelect").value
+const amount=parseFloat(document.getElementById("withdrawAmount").value)
 
-saveData(data);
+if(!amount || amount<=0){
+alert("Enter valid amount")
+return
+}
 
-renderDashboard();
+if(totals[jar] < amount){
+alert("Not enough money in this jar")
+return
+}
+
+totals[jar] -= amount
+
+updateUI()
+updateChart()
 
 }
