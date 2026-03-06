@@ -39,6 +39,19 @@ createUserWithEmailAndPassword(auth, email, password)
 alert("Account created!");
 window.location.href = "index.html";
 
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+}
+  
+})
+.catch(error => alert(error.message));
+
+}
+
 window.googleLogin = function(){
 
 signInWithPopup(auth, provider)
@@ -52,19 +65,6 @@ console.log("Google User:", user);
 window.location.href = "index.html";
 
 })
-
-.catch((error)=>{
-
-alert(error.message);
-
-});
-
-}
-  
-})
-.catch(error => alert(error.message));
-
-}
 
 window.login = function(){
 
@@ -106,6 +106,7 @@ window.location.href = "login.html";
 }
 
 });
+
 
 
 
